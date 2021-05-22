@@ -1,14 +1,17 @@
-capacity = 160*2 # 2 storage systems 160 kWh each
+capacity = 160 * 2  # 2 storage systems 160 kWh each
 depth_of_discharge = 0.7
 critical_discharge = 0.2
 eta = 0.96
 
-class StorageModel(object):
 
-    def __init__(self, capacity=capacity,
-                depth_of_discharge=depth_of_discharge,
-                critical_discharge=critical_discharge,
-                eta=eta):
+class StorageModel(object):
+    def __init__(
+        self,
+        capacity=capacity,
+        depth_of_discharge=depth_of_discharge,
+        critical_discharge=critical_discharge,
+        eta=eta,
+    ):
 
         self.capacity = capacity
         self.depth_of_discharge = depth_of_discharge

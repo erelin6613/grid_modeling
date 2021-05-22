@@ -18,12 +18,9 @@ class PVModel(object):
                     provided by manufacturer
     """
 
-    def __init__(self, num_modules,
-                module_area,
-                eta_r=0.19,
-                eta_tr=0.25,
-                noct=45,
-                beta=0.005):
+    def __init__(
+        self, num_modules, module_area, eta_r=0.19, eta_tr=0.25, noct=45, beta=0.005
+    ):
 
         self.num_modules = num_modules
         self.module_area = module_area
@@ -34,7 +31,10 @@ class PVModel(object):
 
     def calc_state(self, radiation, temperature_amb, temperature_prev=20):
 
-        eta = self.eta_r*self.eta_tr*(
-            1- (self.beta*(temperature_amb-temperature_prev)))
-        state = eta*self.num_modules*radiation
+        eta = (
+            self.eta_r
+            * self.eta_tr
+            * (1 - (self.beta * (temperature_amb - temperature_prev)))
+        )
+        state = eta * self.num_modules * radiation
         return state
