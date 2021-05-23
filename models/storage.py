@@ -1,4 +1,4 @@
-capacity = 160 * 2  # 2 storage systems 160 kWh each
+capacity = 160 * 2 * 1000  # 2 storage systems 160 kWh each
 depth_of_discharge = 0.7
 critical_discharge = 0.2
 eta = 0.96
@@ -24,8 +24,9 @@ class StorageModel(object):
         self.min_capacity = self.capacity * self.critical_discharge
         self.storage = self.depth_of_discharge * self.capacity * self.eta
 
-    def process_load(self, load):
-        self.storage += load
+    def process_load(self, load, power):
+        self.storage -= load
+        self.storage += power
 
         if self.max_capacity < self.storage:
             self.storage = self.max_capacity

@@ -69,15 +69,16 @@ class Consumer:
 
         load_coef = self.hour_priors[hour]
 
-        p_maxload = np.random.choice([0, 1], size=1, p=[self.cf, 1 - self.cf])[0]
-        p_minload = np.random.choice([0, 1], size=1, p=[self.cf, 1 - self.cf])[0]
+        load_scenario = np.random.choice(['min', 'max', 'regular'],
+            size=1, p=[(1-self.cf)/4, self.cf, 3*(1-self.cf)/4])[0]
 
-        if p_minload == 1:
+        if load_scenario == 'min':
             load = np.random.normal(self.min_load, self.std, 1)[0]
-        elif p_maxload == 1:
+        elif load_scenario == 'max':
             load = np.random.normal(self.max_load, self.std, 1)[0]
         else:
-            load = load_coef * self.max_load
-            load = np.random.normal(load, self.std, 1)[0]
+            load = np.random.normal(load_coef*self.max_load, self.std, 1)[0]
+
+        load = 0 if load < 0 else load
 
         return load

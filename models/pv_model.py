@@ -3,8 +3,7 @@ class PVModel(object):
     PVModel is an object modeling a photovoltaic system.
 
     @param: num_modules - number of photovoltaic moduels
-                            in the system (not to be confused
-                            with panels)
+                            in the system
     @param: module_area - surface active area of one module
                             (area exposed to solar raiation)
     @param: eta_r - nominal module efficiency coeffiecient
@@ -36,5 +35,5 @@ class PVModel(object):
             * self.eta_tr
             * (1 - (self.beta * (temperature_amb - temperature_prev)))
         )
-        state = eta * self.num_modules * radiation
+        state = eta * self.num_modules * self.module_area * radiation
         return state
